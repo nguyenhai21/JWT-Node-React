@@ -11,6 +11,7 @@ const router = express.Router();
 const initWebRoutes = (app) => {
     router.get("/", homeController.handleHome);
     router.get('/user', homeController.handleUser);
+    router.post('/users/create-user', homeController.handleNewCreateUser)
 
     return app.use("/", router);
 }
