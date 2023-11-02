@@ -3,8 +3,10 @@ const handleHome = (req, res) => {
     return res.render('home.ejs');
 }
 
-const handleUser = (req, res) => {
-    return res.render('user.ejs');
+const handleUser = async (req, res) => {
+    let userList = await userService.getListUser();
+    console.log('check user list: ', userList)
+    return res.render('user.ejs', { userList });
 }
 
 const handleNewCreateUser = (req, res) => {
@@ -19,7 +21,7 @@ const handleNewCreateUser = (req, res) => {
     // let check = bcrypt.compareSync(password, hashPassword); // true
     // console.log('>>>check password: ', check)
     userService.createNewUser(email, password, username);
-    userService.listUser();
+
 
 
     return res.send('handleNewCreateUser');
