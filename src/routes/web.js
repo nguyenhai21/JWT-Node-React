@@ -11,7 +11,8 @@ const router = express.Router();
 const initWebRoutes = (app) => {
     router.get("/", homeController.handleHome);
     router.get('/user', homeController.handleUser);
-    router.post('/users/create-user', homeController.handleNewCreateUser)
+    router.post('/users/create-user', homeController.handleNewCreateUser);
+    router.post('/delete-user/:id', homeController.handleDeleteUser)
 
     return app.use("/", router);
 }

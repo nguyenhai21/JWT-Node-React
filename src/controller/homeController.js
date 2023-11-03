@@ -5,6 +5,7 @@ const handleHome = (req, res) => {
 
 const handleUser = async (req, res) => {
     let userList = await userService.getListUser();
+
     console.log('check user list: ', userList)
     return res.render('user.ejs', { userList });
 }
@@ -21,12 +22,17 @@ const handleNewCreateUser = (req, res) => {
     // let check = bcrypt.compareSync(password, hashPassword); // true
     // console.log('>>>check password: ', check)
     userService.createNewUser(email, password, username);
+    return res.redirect('/user');
+}
 
-
-
-    return res.send('handleNewCreateUser');
+const handleDeleteUser = async (req, res) => {
+    await userService.deleteUser(req.params.id);
+    return res.redirect('/user');
 }
 
 module.exports = {
-    handleHome, handleUser, handleNewCreateUser
+    handleHome,
+    handleUser,
+    handleNewCreateUser,
+    handleDeleteUser
 }
