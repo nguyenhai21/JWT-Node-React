@@ -5,8 +5,6 @@ const handleHome = (req, res) => {
 
 const handleUser = async (req, res) => {
     let userList = await userService.getListUser();
-
-    console.log('check user list: ', userList)
     return res.render('user.ejs', { userList });
 }
 
@@ -30,9 +28,27 @@ const handleDeleteUser = async (req, res) => {
     return res.redirect('/user');
 }
 
+const getUpdateUserPage = async (req, res) => {
+    let id = req.params.id;
+    let user = await userService.getUserById(id);
+    let userData = {};
+    if (user && user.length > 0) {
+        userData = user[0];
+    }
+    return res.render('user-update.ejs', { userData });
+}
+
+const handleUpdateUser = async (req, res) => {
+    let { email, password, username, id } = req.body;
+    await userService.updateUserInfor(email, password, username, id);
+    return res.redirect('/user');
+}
+
 module.exports = {
     handleHome,
     handleUser,
     handleNewCreateUser,
-    handleDeleteUser
+    handleDeleteUser,
+    getUpdateUserPage,
+    handleUpdateUser
 }
