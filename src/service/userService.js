@@ -52,8 +52,8 @@ const getListUser = async () => {
         nest: true
     })
 
-    console.log('>>check newUser: ', newUser)
-    console.log('>>check new g: ', r)
+    // console.log('>>check newUser: ', newUser)
+    // console.log('>>check new g: ', r)
 
     let users = [];
     users = await db.User.findAll();
