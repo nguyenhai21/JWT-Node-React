@@ -56,10 +56,11 @@ const registerNewUser = async (rawUserData) => {
             password: hashPassword,
             phone: rawUserData.phone
         })
+        console.log('>>>rawUserData: ', rawUserData)
 
         return {
             EM: 'A user is create succesfully',
-            EC: 0
+            EC: '0'
         }
 
     } catch (error) {
