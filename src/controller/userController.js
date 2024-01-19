@@ -60,9 +60,15 @@ const updateFunc = (req, res) => {
     }
 }
 
-const deleteFunc = (req, res) => {
+const deleteFunc = async (req, res) => {
     try {
-
+        console.log('req.body==', req.body)
+        let data = await userApiService.deleteUser(req.body.id);
+        return res.status(200).json({
+            EM: data.EM,//error mesage
+            EC: data.EC, //error code
+            DT: data.DT, //data
+        })
     } catch (error) {
         console.log('>>check err: ', error)
         return res.status(500).json({
